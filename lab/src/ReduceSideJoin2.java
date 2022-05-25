@@ -91,43 +91,46 @@ public class ReduceSideJoin2 {
 	public static class ReduceSideJoin2Mapper extends Mapper<Object, Text, DoubleString, Text> {
 		boolean fileA = true;
 
-		public void map(Object key, Text value, Context context)
-			       	throws IOException, InterruptedException {
+		public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 			StringTokenizer itr = new StringTokenizer(value.toString(), "|");
 			DoubleString outputKey = null;
 			Text outputValue = new Text();
 			
 			if (fileA) {
-				String product_id = itr.nextToken();
-				String product_price = itr.nextToken();
-				String product_code = itr.nextToken();
+				String productId = itr.nextToken();
+				String productPrice = itr.nextToken();
+				String productCode = itr.nextToken();
 
-				outputKey = new DoubleString(product_code, "A");
-				outputValue.set(product_id + "," + product_price);
+				outputKey = new DoubleString(productCode, "A");
+				outputValue.set(productId + "," + productPrice);
 			}
 			else {
-				String product_code = itr.nextToken();
-				String product_desc = itr.nextToken();
+				String productCode = itr.nextToken();
+				String productDescription = itr.nextToken();
 				
-				outputKey = new DoubleString(product_code, "B");
-				outputValue.set(product_desc);
+				outputKey = new DoubleString(productCode, "B");
+				outputValue.set(productDescription);
 			}
+
 			context.write(outputKey, outputValue);
 		}
 
-		protected void setup(Context context)
-			       	throws IOException, InterruptedException {
+		protected void setup(Context context) throws IOException, InterruptedException {
 			String filename = ((FileSplit) context.getInputSplit()).getPath().getName();
-			if ( filename.indexOf( "relation_a" ) != -1 ) fileA = true;
-			else fileA = false;
+
+			if (filename.indexOf("relation_a") != -1) {
+				fileA = true;
+			}
+			else {
+				fileA = false;
+			}	
 		}
 	}
 
 	public static class ReduceSideJoin2Reducer extends Reducer <DoubleString,Text,Text,Text> {
-		public void reduce(DoubleString key, Iterable<Text> values, Context context)
-			       	throws IOException, InterruptedException {
-			Text reduce_key = new Text();
-			Text reduce_val = new Text();
+		public void reduce(DoubleString key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+			Text reduceKey = new Text();
+			Text reduceVal = new Text();
 
 			boolean isFirst = true;
 			String description = "";
@@ -141,13 +144,13 @@ public class ReduceSideJoin2 {
 					String strVal = val.toString();
 					String [] splitedVal = strVal.split(",");
 					
-					String product_id = splitedVal[0];
-					String product_price = splitedVal[1];
+					String productId = splitedVal[0];
+					String productPrice = splitedVal[1];
 					
-					reduce_key.set(product_id);
-					reduce_val.set(product_price + " " + description);
+					reduceKey.set(productId);
+					reduceVal.set(productPrice + " " + description);
 					
-					context.write(reduce_key, reduce_val);
+					context.write(reduceKey, reduceVal);
 				}
 			}
 		}
