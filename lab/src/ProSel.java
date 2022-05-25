@@ -11,7 +11,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 
-public class ProSelStudent20190981 {
+public class ProSel {
 	public static class ProSelMapper extends Mapper<Object, Text, Text, Text>{
 		private Text word = new Text();
 		private Text result = new Text( new byte[0] );
@@ -40,7 +40,7 @@ public class ProSelStudent20190981 {
 		}
 		
 		Job job = new Job(conf, "ProSel");
-		job.setJarByClass(ProSelStudent20190981.class);
+		job.setJarByClass(ProSel.class);
 		job.setMapperClass(ProSelMapper.class);
 		job.setNumReduceTasks(0);
 		job.setOutputKeyClass(Text.class);

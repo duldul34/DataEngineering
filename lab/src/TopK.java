@@ -116,7 +116,7 @@ public class TopKStudent20190981 {
 		}
 		conf.setInt("topK", topK);
 		Job job = new Job(conf, "TopK");
-		job.setJarByClass(TopKStudent20190981.class);
+		job.setJarByClass(TopK.class);
 		job.setMapperClass(TopKMapper.class);
 		job.setReducerClass(TopKReducer.class);
 		job.setNumReduceTasks(1);

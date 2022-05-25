@@ -12,7 +12,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 
-public class UBERStudent20190981 {
+public class UBER {
 	public static String dayToStr(int day) {
 		switch (day) {
 			case 1:
@@ -110,9 +110,9 @@ public class UBERStudent20190981 {
 			System.exit(2);
 		}
 
-    		Job job = new Job(conf, "UBERStudent20190981");
+    		Job job = new Job(conf, "UBER");
 
-    		job.setJarByClass(UBERStudent20190981.class);
+    		job.setJarByClass(UBER.class);
 		job.setMapperClass(UBERMapper.class);
 		job.setReducerClass(UBERReducer.class);
 		job.setCombinerClass(UBERReducer.class);

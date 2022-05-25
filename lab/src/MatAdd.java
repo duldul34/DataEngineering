@@ -9,7 +9,7 @@ import org.apache.hadoop.mapreduce.lib.input.*;
 import org.apache.hadoop.mapreduce.lib.output.*;
 import org.apache.hadoop.util.GenericOptionsParser;
 
-public class MatAddStudent20190981 {
+public class MatAdd {
 public static class MatrixAddMapper extends Mapper<Object, Text, Text, IntWritable>
 	{
 		private final static IntWritable i_value = new IntWritable(1);
@@ -45,13 +45,13 @@ public static class MatrixAddMapper extends Mapper<Object, Text, Text, IntWritab
 		String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
 		if (otherArgs.length != 2)
 		{
-			System.err.println("Usage: MatrixAdd <in> <out>");
+			System.err.println("Usage: MatAdd <in> <out>");
 			System.exit(2);
 		}
 		
-		Job job = new Job(conf, "MatrixAdd2010981");
+		Job job = new Job(conf, "MatAdd");
 
-		job.setJarByClass(MatAddStudent20190981.class);
+		job.setJarByClass(MatAdd.class);
 		job.setMapperClass(MatrixAddMapper.class);
 		job.setReducerClass(MatrixAddReducer.class);
 		

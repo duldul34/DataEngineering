@@ -11,7 +11,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 
-public class IMDBStudent20190981
+public class IMDB
 {
 	public static class IMDBMapper extends Mapper<LongWritable, Text, Text, LongWritable> 
 	{
@@ -59,9 +59,9 @@ public class IMDBStudent20190981
 			System.exit(2);
 		}
 	
-		Job job = new Job(conf, "IMDBStudent20190981");
+		Job job = new Job(conf, "IMDB");
 
-		job.setJarByClass(IMDBStudent20190981.class);
+		job.setJarByClass(IMDB.class);
 		job.setMapperClass(IMDBMapper.class);
 		job.setReducerClass(IMDBReducer.class);
 		job.setCombinerClass(IMDBReducer.class);

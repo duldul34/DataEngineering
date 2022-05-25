@@ -11,7 +11,7 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 
-public class MatMulStudent20190981 {
+public class MatMul {
 	public static class MatrixMulMapper1 extends Mapper<Object, Text, Text, IntWritable>
 	{
 		private Text word = new Text();
@@ -124,7 +124,7 @@ public class MatMulStudent20190981 {
 		conf.setInt("n", n_value);
 		
 		Job job1 = new Job(conf, "matrix mult1");
-		job1.setJarByClass(MatMulStudent20190981.class);
+		job1.setJarByClass(MatMul.class);
 		job1.setMapperClass(MatrixMulMapper1.class);
 		job1.setReducerClass(MatrixMulReducer1.class);
 		job1.setOutputKeyClass(Text.class);
