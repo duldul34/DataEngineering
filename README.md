@@ -1,0 +1,2 @@
+- MapReduce 기반 알고리즘 학습
+- Hadoop 및 Spark와 같은 빅데이터 처리 시스템 연습
